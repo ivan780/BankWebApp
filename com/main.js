@@ -13,17 +13,28 @@ window.onload= function(){
 
     if (document.readyState=="complete"){
         console.log("Hey");
-        mStoreApp= new clsStoreApp(window,document);
         mCookie = new clsCookies(document);
+        mStoreApp= new clsStoreApp(window, document, mCookie, true);
     }
     /**
      * Por hacer
      *
      * Mostrar hora local
      *
-     * Crear la Initial Screen(dashboard)
-     *
      * Login 2 pasos
+     */
+    /**
+     * Por si me aburro
+     *
+     * Validat DNI
+     *
+     * Setters
+     *
+     * validar por tipo
+     *
+     * captcha
+     *
+     * hacer JSDoc
      */
     /**
      * Hecho
@@ -31,6 +42,7 @@ window.onload= function(){
      *
      * Pantalla forget password
      *
+     *Crear la Initial Screen(dashboard)
      *
      */
   
