@@ -22,6 +22,8 @@ window.onload= function(){
      * Mostrar hora local
      *
      * Login 2 pasos
+     *
+     * lo del banco sabadell de las cordenadas
      */
     /**
      * Por si me aburro
