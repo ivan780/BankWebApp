@@ -33,12 +33,17 @@ class clsStoreApp{
 
 /////////////////////////////////////////////////////////////////////////////
     forgotPass(){
-
+        //Envio de correo al servidor, si hubiera
+        this.NavigateTo("EmailSend")
     }
 /////////////////////////////////////////////////////////////////////////////
     NavigateTo(pScreen){
         if (pScreen=='initialscreen'){
             this.win.location.href = "initialscreen.html";
+        }else if (pScreen == 'forgetPass'){
+            this.win.location.href = "forgotPassword.html";
+        }else if (pScreen == 'EmailSend'){
+            this.win.location.href = "emailSend.html";
         }
 
     }
