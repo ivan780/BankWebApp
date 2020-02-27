@@ -18,8 +18,6 @@ window.onload= function(){
     /**
      * Por hacer
      *
-     * Pantalla forget password
-     *
      * Mostrar hora local
      *
      * Crear la Initial Screen(dashboard)
@@ -29,6 +27,8 @@ window.onload= function(){
     /**
      * Hecho
      * Validate Password(8 char, 1Uper, 1Lowe, 1Sym)
+     *
+     * Pantalla forget password
      *
      *
      */
