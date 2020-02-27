@@ -1,0 +1,59 @@
+class clsCookies {
+
+    /**
+     *
+     * @param{Document} pDoc
+     */
+    constructor(pDoc) {
+        this.Doc = pDoc;
+    }
+/////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @param {String} pName
+     * @param {Number} pValue
+     * @param {Number} pDays
+     */
+    setCookie(pName, pValue, pDays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (pDays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        this.Doc.cookie = pName + "=" + pValue + ";" + expires + ";path=/";
+    }
+
+    /**
+     *
+     * @param {String} pName
+     * @returns {string}
+     */
+    getCookie(pName) {
+        var name = pName + "=";
+        var decodedCookie = decodeURIComponent(this.Doc.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    /**
+     checkCookie() {
+        var username = this.getCookie("username");
+        if (username != "") {
+            alert("Welcome again " + username);
+        } else {
+            username = prompt("Please enter your name:", "");
+            if (username != "" && username != null) {
+                this.setCookie("username", username, 365);
+            }
+        }
+    }
+     */
+
+}
