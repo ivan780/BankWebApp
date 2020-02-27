@@ -1,4 +1,5 @@
 var mStoreApp;
+var mCookie;
 var mUtils;
 console.log('ssssshey');
 
@@ -13,7 +14,7 @@ window.onload= function(){
     if (document.readyState=="complete"){
         console.log("Hey");
         mStoreApp= new clsStoreApp(window,document);
-   
+        mCookie = new clsCookies(document);
     }
     /**
      * Por hacer
