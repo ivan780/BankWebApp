@@ -12,11 +12,10 @@ class clsCookies {
      *
      * @param {String} pName
      * @param {Number} pValue
-     * @param {Number} pDays
      */
-    setCookie(pName, pValue, pDays) {
+    setCookie(pName, pValue) {
         var d = new Date();
-        d.setTime(d.getTime() + (pDays*24*60*60*1000));
+        d.setTime(d.getTime() + (24*60*60*1000));
         var expires = "expires="+ d.toUTCString();
         this.Doc.cookie = pName + "=" + pValue + ";" + expires + ";path=/";
     }
