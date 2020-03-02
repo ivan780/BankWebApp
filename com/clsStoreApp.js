@@ -10,6 +10,24 @@ class clsStoreApp {
     }
 
 /////////////////////////////////////////////////////////////////////////////
+    userLogin() {
+        if (this.ValidateFields(1)){
+            var tUN = this.GetScreenValue('username');
+
+            if (tUN == 'admin') {
+                this.cookies.setCookie("user", tUN);
+                this.NavigateTo('initialscreen');
+                return true;
+            }
+        }
+    }
+/////////////////////////////////////////////////////////////////////////////
+    passLogin() {
+        if (this.ValidateFields(2)){
+
+        }
+    }
+/////////////////////////////////////////////////////////////////////////////
     Login() {
         if (this.ValidateFields() == true) {
             console.log('Datos todo correcto ' + this.GetScreenValue('username'));
@@ -37,7 +55,7 @@ class clsStoreApp {
     }
 /////////////////////////////////////////////////////////////////////////////
     checkCredentials() {
-        if (this.win.location.href != "http://localhost:63342/ejemplo/index.html") {
+        if (this.win.location.href != "http://localhost:63342/examenAure/index.html") {
             var user = this.cookies.getCookie("user");
             var pass = this.cookies.getCookie("pass");
             if (this.debug) {
@@ -73,23 +91,24 @@ class clsStoreApp {
         }
     }
 /////////////////////////////////////////////////////////////////////////////
-    ValidateFields() {
-        var tUN = this.GetScreenValue('username');
-        var tPW = this.GetScreenValue('password');
-        console.log('Validate fields' + tUN.length);
+    ValidateFields(pMode) {
+        if (pMode == 1){//validar usuario
+            var tUN = this.GetScreenValue('username');
+            if (!(tUN.length > 3)) {
+                this.GenerateScreenErr('Usuario no válido');
+                return false;
+            }
+        }else if (pMode == 2){//validar pass
+            var tPW = this.GetScreenValue('password');
+            console.log('Validate fields' + tUN.length);
+            if (this.patronPass.test(tPW)) {
+                this.GenerateScreenErr('Password  no válido');
+                return false;
+            }
+        }
 
-        if (!(tUN.length > 3)) {
-            this.GenerateScreenErr('Usuario no válido');
-            return false;
-        }
-        if (!(this.patronPass.test(tPW))) {
-            this.GenerateScreenErr('Password  no válido');
-            return false;
-        }
         console.log("ValidateFields OK");
         return true;
-
-
     }
 /////////////////////////////////////////////////////////////////////////////
     GetScreenValue(pFieldName) {
@@ -102,5 +121,13 @@ class clsStoreApp {
         console.log('Error message ' + pMessage);
         // Alert
     }
+/////////////////////////////////////////////////////////////////////////////
+    validateEmail(){
+
+    }
+
+/////////////////////////////////////////////////////////////////////////////
+///Basurero
+/////////////////////////////////////////////////////////////////////////////
 
 }
