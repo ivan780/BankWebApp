@@ -24,6 +24,8 @@ window.onload= function(){
      * Login 2 pasos
      *
      * lo del banco sabadell de las cordenadas
+     *
+     * Validar email
      */
     /**
      * Por si me aburro
