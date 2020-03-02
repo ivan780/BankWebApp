@@ -16,9 +16,7 @@ class clsStoreApp {
             var tUN = this.GetScreenValue('username');
             var tPW = this.GetScreenValue('password');
 
-            if (!!this.validatePass(tPW)) {
-                return false;
-            }
+
 
             if (tUN == 'admin' && tPW == 'Hola!123') {
                 this.cookies.setCookie("user", tUN, 1);
@@ -28,21 +26,6 @@ class clsStoreApp {
             }
         }
         return false;
-    }
-
-/////////////////////////////////////////////////////////////////////////////
-    validatePass(pPassword) {
-        if (this.patronPass.test(pPassword)) {
-            if (this.debug) {
-                console.log("validatePass() = true")
-            }
-            return true
-        } else {
-            if (this.debug) {
-                console.log("validatePass() = false")
-            }
-            return false;
-        }
     }
 /////////////////////////////////////////////////////////////////////////////
     forgotPass() {
@@ -74,7 +57,6 @@ class clsStoreApp {
             }
         }
     }
-
 /////////////////////////////////////////////////////////////////////////////
     NavigateTo(pScreen) {
         if (this.debug) {
@@ -100,7 +82,7 @@ class clsStoreApp {
             this.GenerateScreenErr('Usuario no válido');
             return false;
         }
-        if (!(tPW.length > 3)) {
+        if (!(this.patronPass.test(tPW))) {
             this.GenerateScreenErr('Password  no válido');
             return false;
         }
