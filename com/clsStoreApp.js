@@ -34,24 +34,6 @@ class clsStoreApp {
         }
     }
 /////////////////////////////////////////////////////////////////////////////
-    Login() {
-        if (this.ValidateFields() == true) {
-            this.GenerateScreenErr('Datos todo correcto ' + this.GetScreenValue('username'));
-            var tUN = this.GetScreenValue('username');
-            var tPW = this.GetScreenValue('password');
-
-
-
-            if (tUN == 'admin' && tPW == 'Hola!123') {
-                this.cookies.setCookie("user", tUN, 1);
-                this.cookies.setCookie("pass", tPW, 1);
-                this.NavigateTo('initScreen');
-                return true
-            }
-        }
-        return false;
-    }
-/////////////////////////////////////////////////////////////////////////////
     forgotPass() {
         if (this.debug) {
             this.GenerateScreenErr("forgotPass()");
@@ -138,5 +120,21 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
 ///Basurero
 /////////////////////////////////////////////////////////////////////////////
+    Login() {
+        if (this.ValidateFields() == true) {
+            this.GenerateScreenErr('Datos todo correcto ' + this.GetScreenValue('username'));
+            var tUN = this.GetScreenValue('username');
+            var tPW = this.GetScreenValue('password');
 
+
+
+            if (tUN == 'admin' && tPW == 'Hola!123') {
+                this.cookies.setCookie("user", tUN, 1);
+                this.cookies.setCookie("pass", tPW, 1);
+                this.NavigateTo('initScreen');
+                return true
+            }
+        }
+        return false;
+    }
 }
