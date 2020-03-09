@@ -16,7 +16,7 @@ class clsStoreApp {
 
             if (tUN == 'admin') {
                 this.cookies.setCookie("user", tUN);
-                this.NavigateTo('initialscreen');
+                this.NavigateTo('pass');
                 return true;
             }
         }
@@ -24,13 +24,19 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     passLogin() {
         if (this.ValidateFields(2)){
+            var tPW = this.GetScreenValue('password');
+        }
 
+        if (tPW == 'Hola!123') {
+            this.cookies.setCookie("pass", tPW);
+            this.NavigateTo('initScreen');
+            return true;
         }
     }
 /////////////////////////////////////////////////////////////////////////////
     Login() {
         if (this.ValidateFields() == true) {
-            console.log('Datos todo correcto ' + this.GetScreenValue('username'));
+            this.GenerateScreenErr('Datos todo correcto ' + this.GetScreenValue('username'));
             var tUN = this.GetScreenValue('username');
             var tPW = this.GetScreenValue('password');
 
@@ -39,7 +45,7 @@ class clsStoreApp {
             if (tUN == 'admin' && tPW == 'Hola!123') {
                 this.cookies.setCookie("user", tUN, 1);
                 this.cookies.setCookie("pass", tPW, 1);
-                this.NavigateTo('initialscreen');
+                this.NavigateTo('initScreen');
                 return true
             }
         }
@@ -48,29 +54,29 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     forgotPass() {
         if (this.debug) {
-            console.log("forgotPass()");
+            this.GenerateScreenErr("forgotPass()");
         }
         //Envio de correo al servidor, si hubiera
         this.NavigateTo("EmailSend")
     }
 /////////////////////////////////////////////////////////////////////////////
     checkCredentials() {
-        if (this.win.location.href != "http://localhost:63342/examenAure/index.html") {
+        if (this.win.location.href != "http://localhost:63342/examenAure/user.html" || this.win.location.href != "http://localhost:63342/examenAure/pass.html") {
             var user = this.cookies.getCookie("user");
             var pass = this.cookies.getCookie("pass");
             if (this.debug) {
-                console.log("user = " + user + "// pass = " + pass);
+                this.GenerateScreenErr("user = " + user + "// pass = " + pass);
             }
             if (user == 'admin' && pass == 'Hola!123') {
                 if (this.debug) {
-                    console.log("checkCredentials() = true");
+                    this.GenerateScreenErr("checkCredentials() = true");
                 }
                 return true
             } else {
                 if (this.debug) {
-                    console.log("checkCredentials() = fale");
+                    this.GenerateScreenErr("checkCredentials() = fale");
                 }
-                this.NavigateTo("login")
+                this.NavigateTo("user")
                 return false
             }
         }
@@ -78,16 +84,18 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     NavigateTo(pScreen) {
         if (this.debug) {
-            console.log("NavigateTo(" + pScreen + ")");
+            this.GenerateScreenErr("NavigateTo(" + pScreen + ")");
         }
-        if (pScreen == 'initialscreen') {
+        if (pScreen == 'initScreen') {
             this.win.location.href = "initialscreen.html";
         } else if (pScreen == 'forgetPass') {
             this.win.location.href = "forgotPassword.html";
         } else if (pScreen == 'EmailSend') {
             this.win.location.href = "emailSend.html";
         } else if (pScreen == 'login') {
-            this.win.location.href = "index.html";
+            this.win.location.href = "user.html";
+        }else if (pScreen == 'pass') {
+            this.win.location.href = "pass.html";
         }
     }
 /////////////////////////////////////////////////////////////////////////////
@@ -100,26 +108,27 @@ class clsStoreApp {
             }
         }else if (pMode == 2){//validar pass
             var tPW = this.GetScreenValue('password');
-            console.log('Validate fields' + tUN.length);
+            this.GenerateScreenErr('Validate fields' + tPW.length);
             if (this.patronPass.test(tPW)) {
                 this.GenerateScreenErr('Password  no válido');
                 return false;
             }
         }
 
-        console.log("ValidateFields OK");
+        this.GenerateScreenErr("ValidateFields OK");
         return true;
     }
 /////////////////////////////////////////////////////////////////////////////
     GetScreenValue(pFieldName) {
         var tS = this.doc.getElementById(pFieldName).value;
-        console.log('________ ' + tS + '  ' + tS.length);
+        console.log("_" + tS);
         return tS
     }
 /////////////////////////////////////////////////////////////////////////////
     GenerateScreenErr(pMessage) {
-        console.log('Error message ' + pMessage);
-        // Alert
+        if (this.debug){
+            console.log('#' + pMessage);
+        }
     }
 /////////////////////////////////////////////////////////////////////////////
     validateEmail(){
