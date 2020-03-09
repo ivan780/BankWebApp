@@ -2,8 +2,8 @@ class clsStoreApp {
     constructor(pWin, pDoc, Cookie, pDebug) {
         this.doc = pDoc;
         this.win = pWin;
-        this.cookies = Cookie
-        this.debug = pDebug
+        this.cookies = Cookie;
+        this.debug = pDebug;
         this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
 
         this.checkCredentials()
@@ -36,7 +36,7 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     forgotPass() {
         if (this.debug) {
-            this.GenerateScreenErr("forgotPass()");
+            this.GenerateConsoleErr("forgotPass()");
         }
         //Envio de correo al servidor, si hubiera
         this.NavigateTo("EmailSend")
@@ -47,16 +47,16 @@ class clsStoreApp {
             var user = this.cookies.getCookie("user");
             var pass = this.cookies.getCookie("pass");
             if (this.debug) {
-                this.GenerateScreenErr("user = " + user + "// pass = " + pass);
+                this.GenerateConsoleErr("user = " + user + "// pass = " + pass);
             }
             if (user == 'admin' && pass == 'Hola!123') {
                 if (this.debug) {
-                    this.GenerateScreenErr("checkCredentials() = true");
+                    this.GenerateConsoleErr("checkCredentials() = true");
                 }
                 return true
             } else {
                 if (this.debug) {
-                    this.GenerateScreenErr("checkCredentials() = fale");
+                    this.GenerateConsoleErr("checkCredentials() = fale");
                 }
                 this.NavigateTo("user")
                 return false
@@ -66,7 +66,7 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     NavigateTo(pScreen) {
         if (this.debug) {
-            this.GenerateScreenErr("NavigateTo(" + pScreen + ")");
+            this.GenerateConsoleErr("NavigateTo(" + pScreen + ")");
         }
         if (pScreen == 'initScreen') {
             this.win.location.href = "initialscreen.html";
@@ -85,19 +85,19 @@ class clsStoreApp {
         if (pMode == 1){//validar usuario
             var tUN = this.GetScreenValue('username');
             if (!(tUN.length > 3)) {
-                this.GenerateScreenErr('Usuario no válido');
+                this.GenerateConsoleErr('Usuario no válido');
                 return false;
             }
         }else if (pMode == 2){//validar pass
             var tPW = this.GetScreenValue('password');
-            this.GenerateScreenErr('Validate fields' + tPW.length);
+            this.GenerateConsoleErr('Validate fields' + tPW.length);
             if (this.patronPass.test(tPW)) {
-                this.GenerateScreenErr('Password  no válido');
+                this.GenerateConsoleErr('Password  no válido');
                 return false;
             }
         }
 
-        this.GenerateScreenErr("ValidateFields OK");
+        this.GenerateConsoleErr("ValidateFields OK");
         return true;
     }
 /////////////////////////////////////////////////////////////////////////////
@@ -107,7 +107,13 @@ class clsStoreApp {
         return tS
     }
 /////////////////////////////////////////////////////////////////////////////
-    GenerateScreenErr(pMessage) {
+    GenerateConsoleErr(pMessage) {
+        if (this.debug){
+            console.log('#' + pMessage);
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////
+    GenerateFormErr(pMessage) {
         if (this.debug){
             console.log('#' + pMessage);
         }
@@ -122,7 +128,7 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     Login() {
         if (this.ValidateFields() == true) {
-            this.GenerateScreenErr('Datos todo correcto ' + this.GetScreenValue('username'));
+            this.GenerateConsoleErr('Datos todo correcto ' + this.GetScreenValue('username'));
             var tUN = this.GetScreenValue('username');
             var tPW = this.GetScreenValue('password');
 
