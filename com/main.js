@@ -1,5 +1,6 @@
 var mStoreApp;
 var mCookie;
+var mUser;
 var mUtils;
 console.log('ssssshey');
 
@@ -12,9 +13,8 @@ function GetRandom(pMax){
 window.onload= function(){
 
     if (document.readyState=="complete"){
-        console.log("Hey");
-        mCookie = new clsCookies(document);
-        mStoreApp= new clsStoreApp(window, document, mCookie, true);
+        console.log("documento cargado");
+        mStoreApp= new clsStoreApp(window, document, true);
     }
     /**
      * Por hacer
