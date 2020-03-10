@@ -1,4 +1,9 @@
 class clsStoreApp {
+    /**
+     * @param {window} pWin
+     * @param {document} pDoc
+     * @param {boolean} pDebug
+     */
     constructor(pWin, pDoc, pDebug) {
         this.doc = pDoc;
         this.win = pWin;
@@ -16,6 +21,9 @@ class clsStoreApp {
     }
 
 /////////////////////////////////////////////////////////////////////////////
+    /**
+     * @return {boolean}
+     */
     userLogin() {
         var tUN = this.GetScreenValue('username');
         if (this.Validate._user(tUN)){
@@ -28,6 +36,9 @@ class clsStoreApp {
         }
     }
 /////////////////////////////////////////////////////////////////////////////
+    /**
+     * @return {boolean}
+     */
     passLogin() {
         var tPW = this.GetScreenValue('password');
         if (this.Validate._pass(tPW)) {
@@ -40,15 +51,22 @@ class clsStoreApp {
         }
     }
 /////////////////////////////////////////////////////////////////////////////
+    /**
+     * @return {boolean}
+     */
     forgotPass() {
         this.GenerateConsoleErr("forgotPass()");
         if (this.Validate._email(this.GetScreenValue("email"))){
             this.NavigateTo("EmailSend")
+            return true;
             //Envio de correo al servidor, si hubiera
         }
 
     }
 /////////////////////////////////////////////////////////////////////////////
+    /**
+     * @param {string} pScreen
+     */
     NavigateTo(pScreen) {
         this.GenerateConsoleErr("NavigateTo(" + pScreen + ")");
 
@@ -65,22 +83,36 @@ class clsStoreApp {
         }
     }
 /////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @param {string} pFieldName
+     * @return {*}
+     */
     GetScreenValue(pFieldName) {
         var tS = this.doc.getElementById(pFieldName).value;
         console.log("_" + tS);
         return tS
     }
 /////////////////////////////////////////////////////////////////////////////
+    /**
+     * @param {string} pMessage
+     */
     GenerateConsoleErr(pMessage) {
         if (this.debug){
             console.log('#' + pMessage);
         }
     }
 /////////////////////////////////////////////////////////////////////////////
+    /**
+     * @param {string} pMessage
+     */
     GenerateConsoleMessage(pMessage) {
             console.log('$' + pMessage);
     }
 /////////////////////////////////////////////////////////////////////////////
+    /**
+     * @param pMessage
+     */
     GenerateFormErr(pMessage) {
         if (this.debug){
             console.log('#' + pMessage);
