@@ -1,8 +1,8 @@
 class clsUser {
     constructor(pDocument, pParent) {
-        this.doc = pDocument;
         this.parent = pParent;
-        this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+
+
         this.users = [
             {user:"admin", pass:"Hola!123"},
             {user:"John", pass:"Doe"}
