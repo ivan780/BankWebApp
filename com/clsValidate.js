@@ -1,6 +1,5 @@
 class clsValidate {
     /**
-     *
      * @param {clsStoreApp} pParent
      */
     constructor(pParent) {
@@ -37,7 +36,6 @@ class clsValidate {
     }
 /////////////////////////////////////////////////////////////////////////////
     /**
-     *
      * @param {string} pUser
      * @return {boolean}
      */
