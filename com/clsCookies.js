@@ -1,5 +1,4 @@
 class clsCookies {
-
     /**
      *
      * @param{Document} pDoc
@@ -40,19 +39,4 @@ class clsCookies {
         }
         return "";
     }
-
-    /**
-     checkCookie() {
-        var username = this.getCookie("username");
-        if (username != "") {
-            alert("Welcome again " + username);
-        } else {
-            username = prompt("Please enter your name:", "");
-            if (username != "" && username != null) {
-                this.setCookie("username", username, 365);
-            }
-        }
-    }
-     */
-
 }
