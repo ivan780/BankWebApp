@@ -1,12 +1,16 @@
 class clsStoreApp {
-    constructor(pWin, pDoc, Cookie, pDebug) {
+    constructor(pWin, pDoc, pDebug) {
         this.doc = pDoc;
         this.win = pWin;
-        this.cookies = Cookie;
         this.debug = pDebug;
-        this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
 
-        this.checkCredentials()
+        this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+
+        this.Cookies = new clsCookies(this.doc);
+        this.User = new clsUser(this.doc, this);
+
+        this.GenerateConsoleMessage("clsStoreApp creado");
+        this.User.checkCredentials()
     }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -15,7 +19,7 @@ class clsStoreApp {
             var tUN = this.GetScreenValue('username');
 
             if (tUN == 'admin') {
-                this.cookies.setCookie("user", tUN);
+                this.Cookies.setCookie("user", tUN);
                 this.NavigateTo('pass');
                 return true;
             }
@@ -28,46 +32,21 @@ class clsStoreApp {
         }
 
         if (tPW == 'Hola!123') {
-            this.cookies.setCookie("pass", tPW);
+            this.Cookies.setCookie("pass", tPW);
             this.NavigateTo('initScreen');
             return true;
         }
     }
 /////////////////////////////////////////////////////////////////////////////
     forgotPass() {
-        if (this.debug) {
-            this.GenerateConsoleErr("forgotPass()");
-        }
+        this.GenerateConsoleErr("forgotPass()");
         //Envio de correo al servidor, si hubiera
         this.NavigateTo("EmailSend")
     }
 /////////////////////////////////////////////////////////////////////////////
-    checkCredentials() {
-        if (this.win.location.href != "http://localhost:63342/examenAure/user.html" || this.win.location.href != "http://localhost:63342/examenAure/pass.html") {
-            var user = this.cookies.getCookie("user");
-            var pass = this.cookies.getCookie("pass");
-            if (this.debug) {
-                this.GenerateConsoleErr("user = " + user + "// pass = " + pass);
-            }
-            if (user == 'admin' && pass == 'Hola!123') {
-                if (this.debug) {
-                    this.GenerateConsoleErr("checkCredentials() = true");
-                }
-                return true
-            } else {
-                if (this.debug) {
-                    this.GenerateConsoleErr("checkCredentials() = fale");
-                }
-                this.NavigateTo("user")
-                return false
-            }
-        }
-    }
-/////////////////////////////////////////////////////////////////////////////
     NavigateTo(pScreen) {
-        if (this.debug) {
-            this.GenerateConsoleErr("NavigateTo(" + pScreen + ")");
-        }
+        this.GenerateConsoleErr("NavigateTo(" + pScreen + ")");
+
         if (pScreen == 'initScreen') {
             this.win.location.href = "initialscreen.html";
         } else if (pScreen == 'forgetPass') {
@@ -112,6 +91,10 @@ class clsStoreApp {
             console.log('#' + pMessage);
         }
     }
+/////////////////////////////////////////////////////////////////////////////
+    GenerateConsoleMessage(pMessage) {
+            console.log('$' + pMessage);
+    }
     /////////////////////////////////////////////////////////////////////////////
     GenerateFormErr(pMessage) {
         if (this.debug){
@@ -135,8 +118,8 @@ class clsStoreApp {
 
 
             if (tUN == 'admin' && tPW == 'Hola!123') {
-                this.cookies.setCookie("user", tUN, 1);
-                this.cookies.setCookie("pass", tPW, 1);
+                this.Cookies.setCookie("user", tUN, 1);
+                this.Cookies.setCookie("pass", tPW, 1);
                 this.NavigateTo('initScreen');
                 return true
             }
