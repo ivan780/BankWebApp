@@ -5,12 +5,13 @@ class clsStoreApp {
         this.debug = pDebug;
 
         this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+        this.patronEmail = new RegExp("^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$");
 
         this.Cookies = new clsCookies(this.doc);
         this.User = new clsUser(this.doc, this);
 
         this.GenerateConsoleMessage("clsStoreApp creado");
-        this.User.checkCredentials()
+        this.User.checkCredentials();
     }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,7 @@ class clsStoreApp {
         if (this.ValidateFields(1)){
             var tUN = this.GetScreenValue('username');
 
-            if (tUN == 'admin') {
+            if (this.User.checkUser(tUN)) {
                 this.Cookies.setCookie("user", tUN);
                 this.NavigateTo('pass');
                 return true;
@@ -31,7 +32,7 @@ class clsStoreApp {
             var tPW = this.GetScreenValue('password');
         }
 
-        if (tPW == 'Hola!123') {
+        if (this.User.checkPass(tPW)) {
             this.Cookies.setCookie("pass", tPW);
             this.NavigateTo('initScreen');
             return true;
@@ -40,8 +41,11 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     forgotPass() {
         this.GenerateConsoleErr("forgotPass()");
-        //Envio de correo al servidor, si hubiera
-        this.NavigateTo("EmailSend")
+        if (!this.validateEmail()){
+            this.NavigateTo("EmailSend")
+            //Envio de correo al servidor, si hubiera
+        }
+
     }
 /////////////////////////////////////////////////////////////////////////////
     NavigateTo(pScreen) {
@@ -95,17 +99,20 @@ class clsStoreApp {
     GenerateConsoleMessage(pMessage) {
             console.log('$' + pMessage);
     }
-    /////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
     GenerateFormErr(pMessage) {
         if (this.debug){
             console.log('#' + pMessage);
         }
     }
 /////////////////////////////////////////////////////////////////////////////
-    validateEmail(){
-
+    validateEmail(pEmail){
+        if (this.patronEmail.test(pEmail)){
+            this.GenerateConsoleErr("email no valido")
+            return true
+        }
+        return false
     }
-
 /////////////////////////////////////////////////////////////////////////////
 ///Basurero
 /////////////////////////////////////////////////////////////////////////////
