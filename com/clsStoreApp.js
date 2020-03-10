@@ -41,7 +41,7 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     forgotPass() {
         this.GenerateConsoleErr("forgotPass()");
-        if (!this.validateEmail()){
+        if (this.validateEmail(this.GetScreenValue("email"))){
             this.NavigateTo("EmailSend")
             //Envio de correo al servidor, si hubiera
         }
@@ -108,9 +108,10 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     validateEmail(pEmail){
         if (this.patronEmail.test(pEmail)){
-            this.GenerateConsoleErr("email no valido")
+            this.GenerateConsoleErr("email valido");
             return true
         }
+        this.GenerateConsoleErr("email invalido");
         return false
     }
 /////////////////////////////////////////////////////////////////////////////
