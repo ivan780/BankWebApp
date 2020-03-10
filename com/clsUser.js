@@ -13,7 +13,7 @@ class clsUser {
     }
 /////////////////////////////////////////////////////////////////////////////ç
     checkCredentials() {
-        if (this.parent.win.location.href == "http://localhost:63342/examenAure/initialscreen.html?_ijt=917kuk987614uirvdf334j7b6t"){
+        if (this.parent.win.location.href == "http://localhost:63342/examenAure/initialscreen.html"){
             var user = this.parent.Cookies.getCookie("user");
             var pass = this.parent.Cookies.getCookie("pass");
 
@@ -36,7 +36,7 @@ class clsUser {
      * @returns {boolean}
      */
     checkUserPass(pUser, pPass){
-        for (var i; i < this.users.length; i++){
+        for (var i = 0; i < this.users.length; i++){
             if (this.users[i].user == pUser){
                 if (this.users[i].pass == pPass){
                     this.parent.GenerateConsoleErr("User y pass correcto");
@@ -55,13 +55,15 @@ class clsUser {
      * @returns {boolean}
      */
     checkUser(pUser){
-        for (var i; i < this.users.length; i++){
+        for (var i = 0; i < this.users.length; i++){
             if (this.users[i].user == pUser){
                 this.parent.GenerateConsoleErr("User correcto");
                 this.parent.GenerateConsoleErr("Posicion del objeto: " + i);
                     return true;
                 }
             }
+
+        this.parent.GenerateConsoleErr("User incorrecto//" + pUser);
         return false;
     }
 /////////////////////////////////////////////////////////////////////////////
@@ -71,13 +73,14 @@ class clsUser {
      * @returns {boolean}
      */
     checkPass(pPass){
-        for (var i; i < this.users.length; i++){
+        for (var i = 0; i < this.users.length; i++){
             if (this.users[i].pass == pPass){
                 this.parent.GenerateConsoleErr("Pass correcto");
                 this.parent.GenerateConsoleErr("Posicion del objeto: " + i);
                 return true;
             }
         }
+        this.parent.GenerateConsoleErr("Pass incorrecto//" + pPass);
         return false;
     }
 /////////////////////////////////////////////////////////////////////////////
