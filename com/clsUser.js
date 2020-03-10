@@ -1,5 +1,8 @@
 class clsUser {
-    constructor(pDocument, pParent) {
+    /**
+     * @param {clsStoreApp} pParent
+     */
+    constructor(pParent) {
         this.parent = pParent;
 
 
@@ -11,7 +14,10 @@ class clsUser {
         this.parent.GenerateConsoleMessage("clsUser creado");
 
     }
-/////////////////////////////////////////////////////////////////////////////ç
+/////////////////////////////////////////////////////////////////////////////
+    /**
+     * @return {boolean}
+     */
     checkCredentials() {
         if (this.parent.win.location.href == "http://localhost:63342/examenAure/initialscreen.html"){
             var user = this.parent.Cookies.getCookie("user");
