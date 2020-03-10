@@ -4,7 +4,7 @@ class clsUser {
         this.parent = pParent;
         this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
         this.users = [
-            {user:"admin", pass:"Doe"},
+            {user:"admin", pass:"Hola!123"},
             {user:"John", pass:"Doe"}
         ];
 
@@ -45,6 +45,38 @@ class clsUser {
                 }
             }
 
+        }
+        return false;
+    }
+/////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @param {string} pUser
+     * @returns {boolean}
+     */
+    checkUser(pUser){
+        for (var i; i < this.users.length; i++){
+            if (this.users[i].user == pUser){
+                this.parent.GenerateConsoleErr("User correcto");
+                this.parent.GenerateConsoleErr("Posicion del objeto: " + i);
+                    return true;
+                }
+            }
+        return false;
+    }
+/////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @param {string} pPass
+     * @returns {boolean}
+     */
+    checkPass(pPass){
+        for (var i; i < this.users.length; i++){
+            if (this.users[i].pass == pPass){
+                this.parent.GenerateConsoleErr("Pass correcto");
+                this.parent.GenerateConsoleErr("Posicion del objeto: " + i);
+                return true;
+            }
         }
         return false;
     }
