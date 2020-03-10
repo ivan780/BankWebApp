@@ -8,7 +8,8 @@ class clsStoreApp {
         this.patronEmail = new RegExp("^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$");
 
         this.Cookies = new clsCookies(this.doc);
-        this.User = new clsUser(this.doc, this);
+        this.User = new clsUser(this);
+        this.Validate = new clsValidate(this);
 
         this.GenerateConsoleMessage("clsStoreApp creado");
         this.User.checkCredentials();
@@ -16,8 +17,8 @@ class clsStoreApp {
 
 /////////////////////////////////////////////////////////////////////////////
     userLogin() {
-        if (this.ValidateFields(1)){
-            var tUN = this.GetScreenValue('username');
+        var tUN = this.GetScreenValue('username');
+        if (this.Validate._user(tUN)){
 
             if (this.User.checkUser(tUN)) {
                 this.Cookies.setCookie("user", tUN);
@@ -28,20 +29,20 @@ class clsStoreApp {
     }
 /////////////////////////////////////////////////////////////////////////////
     passLogin() {
-        if (this.ValidateFields(2)){
-            var tPW = this.GetScreenValue('password');
-        }
+        var tPW = this.GetScreenValue('password');
+        if (this.Validate._pass(tPW)) {
 
-        if (this.User.checkPass(tPW)) {
-            this.Cookies.setCookie("pass", tPW);
-            this.NavigateTo('initScreen');
-            return true;
+            if (this.User.checkPass(tPW)) {
+                this.Cookies.setCookie("pass", tPW);
+                this.NavigateTo('initScreen');
+                return true;
+            }
         }
     }
 /////////////////////////////////////////////////////////////////////////////
     forgotPass() {
         this.GenerateConsoleErr("forgotPass()");
-        if (this.validateEmail(this.GetScreenValue("email"))){
+        if (this.Validate._email(this.GetScreenValue("email"))){
             this.NavigateTo("EmailSend")
             //Envio de correo al servidor, si hubiera
         }
@@ -62,26 +63,6 @@ class clsStoreApp {
         }else if (pScreen == 'pass') {
             this.win.location.href = "pass.html";
         }
-    }
-/////////////////////////////////////////////////////////////////////////////
-    ValidateFields(pMode) {
-        if (pMode == 1){//validar usuario
-            var tUN = this.GetScreenValue('username');
-            if (!(tUN.length > 3)) {
-                this.GenerateConsoleErr('Usuario no válido');
-                return false;
-            }
-        }else if (pMode == 2){//validar pass
-            var tPW = this.GetScreenValue('password');
-            this.GenerateConsoleErr('Validate fields' + tPW.length);
-            if (this.patronPass.test(tPW)) {
-                this.GenerateConsoleErr('Password  no válido');
-                return false;
-            }
-        }
-
-        this.GenerateConsoleErr("ValidateFields OK");
-        return true;
     }
 /////////////////////////////////////////////////////////////////////////////
     GetScreenValue(pFieldName) {
@@ -106,23 +87,13 @@ class clsStoreApp {
         }
     }
 /////////////////////////////////////////////////////////////////////////////
-    validateEmail(pEmail){
-        if (this.patronEmail.test(pEmail)){
-            this.GenerateConsoleErr("email valido");
-            return true
-        }
-        this.GenerateConsoleErr("email invalido");
-        return false
-    }
-/////////////////////////////////////////////////////////////////////////////
 ///Basurero
 /////////////////////////////////////////////////////////////////////////////
     Login() {
-        if (this.ValidateFields() == true) {
+        if (this._ValidateFields() == true) {
             this.GenerateConsoleErr('Datos todo correcto ' + this.GetScreenValue('username'));
             var tUN = this.GetScreenValue('username');
             var tPW = this.GetScreenValue('password');
-
 
 
             if (tUN == 'admin' && tPW == 'Hola!123') {
@@ -133,5 +104,25 @@ class clsStoreApp {
             }
         }
         return false;
+    }
+/////////////////////////////////////////////////////////////////////////////
+    ValidateFields(pMode) {
+        if (pMode == 1){//validar usuario
+            var tUN = this.GetScreenValue('username');
+            if (!(tUN.length > 3)) {
+                this.GenerateConsoleErr('Usuario no válido');
+                return false;
+            }
+        }else if (pMode == 2){//validar pass
+            var tPW = this.GetScreenValue('password');
+            this.GenerateConsoleErr('Validate fields' + tPW.length);
+            if (this.patronPass.test(tPW)) {
+                this.GenerateConsoleErr('Password  no válido');
+                return false;
+            }
+        }
+
+        this.GenerateConsoleErr("ValidateFields OK");
+        return true;
     }
 }
