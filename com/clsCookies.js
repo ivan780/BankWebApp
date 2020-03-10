@@ -1,6 +1,5 @@
 class clsCookies {
     /**
-     *
      * @param{Document} pDoc
      */
     constructor(pDoc) {
@@ -8,7 +7,6 @@ class clsCookies {
     }
 /////////////////////////////////////////////////////////////////////////////
     /**
-     *
      * @param {String} pName
      * @param {Number} pValue
      */
@@ -20,7 +18,6 @@ class clsCookies {
     }
 
     /**
-     *
      * @param {String} pName
      * @returns {string}
      */
