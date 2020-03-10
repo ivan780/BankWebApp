@@ -1,0 +1,75 @@
+class clsUser {
+    constructor(pDocument, pParent) {
+        this.doc = pDocument;
+        this.parent = pParent;
+        this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+        this.users = [
+            {user:"admin", pass:"Doe"},
+            {user:"John", pass:"Doe"}
+        ];
+
+        this.parent.GenerateConsoleMessage("clsUser creado");
+
+    }
+/////////////////////////////////////////////////////////////////////////////ç
+    checkCredentials() {
+        if (this.parent.win.location.href == "http://localhost:63342/examenAure/initialscreen.html?_ijt=917kuk987614uirvdf334j7b6t"){
+            var user = this.parent.Cookies.getCookie("user");
+            var pass = this.parent.Cookies.getCookie("pass");
+
+            this.parent.GenerateConsoleErr("user = " + user + "// pass = " + pass);
+            if (this.checkUserPass(user, pass)){
+                this.parent.GenerateConsoleMessage("credenciales correctos");
+                return true
+            }else {
+                this.parent.GenerateConsoleMessage("credenciales incorrectos");
+                this.parent.NavigateTo("login");
+                return false
+            }
+        }
+    }
+/////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * @param {string} pUser
+     * @param {string} pPass
+     * @returns {boolean}
+     */
+    checkUserPass(pUser, pPass){
+        for (var i; i < this.users.length; i++){
+            if (this.users[i].user == pUser){
+                if (this.users[i].pass == pPass){
+                    this.parent.GenerateConsoleErr("User y pass correcto");
+                    this.parent.GenerateConsoleErr("Posicion del objeto: " + i);
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+/////////////////////////////////////////////////////////////////////////////
+///Basurero
+/////////////////////////////////////////////////////////////////////////////
+    __checkCredentials() {
+        if (this.win.location.href != "http://localhost:63342/examenAure/user.html" || this.win.location.href != "http://localhost:63342/examenAure/pass.html") {
+            var user = this.Cookies.getCookie("user");
+            var pass = this.Cookies.getCookie("pass");
+            if (this.debug) {
+                this.GenerateConsoleErr("user = " + user + "// pass = " + pass);
+            }
+            if (user == 'admin' && pass == 'Hola!123') {
+                if (this.debug) {
+                    this.GenerateConsoleErr("checkCredentials() = true");
+                }
+                return true
+            } else {
+                if (this.debug) {
+                    this.GenerateConsoleErr("checkCredentials() = fale");
+                }
+                this.NavigateTo("user")
+                return false
+            }
+        }
+    }
+}
