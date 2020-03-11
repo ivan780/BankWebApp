@@ -19,7 +19,7 @@ class clsUser {
      * @return {boolean}
      */
     checkCredentials() {
-        if (this.parent.win.location.href == "http://localhost:63342/examenAure/initialscreen.html"){
+        if (this.parent.win.location.href == "http://localhost:63342/examenAure/initialscreen.html?_ijt=f6lu0l5mjr23qt25q7d1htuhbu"){
             var user = this.parent.Cookies.getCookie("user");
             var pass = this.parent.Cookies.getCookie("pass");
 
@@ -43,14 +43,13 @@ class clsUser {
      */
     checkUserPass(pUser, pPass){
         for (var i = 0; i < this.users.length; i++){
-            if (this.users[i].user == pUser){
-                if (this.users[i].pass == pPass){
+            if (md5(this.users[i].user) ==  pUser ){
+                if (md5(this.users[i].pass) == pPass ){
                     this.parent.GenerateConsoleErr("User y pass correcto");
                     this.parent.GenerateConsoleErr("Posicion del objeto: " + i);
                     return true;
                 }
             }
-
         }
         return false;
     }

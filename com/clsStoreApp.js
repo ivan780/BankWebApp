@@ -29,7 +29,7 @@ class clsStoreApp {
         if (this.Validate._user(tUN)){
 
             if (this.User.checkUser(tUN)) {
-                this.Cookies.setCookie("user", tUN);
+                this.Cookies.setCookie("user", md5(tUN) );
                 this.NavigateTo('pass');
                 return true;
             }
@@ -41,10 +41,10 @@ class clsStoreApp {
      */
     passLogin() {
         var tPW = this.GetScreenValue('password');
-        if (this.Validate._pass(tPW)) {
+        if (!this.Validate._pass(tPW)) {
 
             if (this.User.checkPass(tPW)) {
-                this.Cookies.setCookie("pass", tPW);
+                this.Cookies.setCookie("pass", md5(tPW) );
                 this.NavigateTo('initScreen');
                 return true;
             }
