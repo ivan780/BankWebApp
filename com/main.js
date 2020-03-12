@@ -18,8 +18,6 @@ window.onload= function(){
      *
      * Mostrar hora local
      *
-     * Login 2 pasos
-     *
      * lo del banco sabadell de las cordenadas
      *
      * Validar email
@@ -30,12 +28,6 @@ window.onload= function(){
      * Validat DNI
      *
      * Setters
-     *
-     * validar por tipo
-     *
-     * captcha
-     *
-     * hacer JSDoc
      */
     /**
      * Hecho
@@ -43,7 +35,23 @@ window.onload= function(){
      *
      * Pantalla forget password
      *
-     *Crear la Initial Screen(dashboard)
+     * Crear la Initial Screen(dashboard)
+     *
+     * Captcha
+     *
+     * MD5
+     *
+     * Coockies
+     *
+     * Mensaje de error
+     *
+     * ~Poder poner mas usuarios y contraseñas
+     *
+     * Ventana para olvidar contraseña
+     *
+     * Validacion del usuario contraseña y email
+     *
+     * Documentacion con JSDoc
      *
      */
   
