@@ -1,9 +1,9 @@
 class clsCookies {
     /**
-     * @param{Document} pDoc
+     * @param {clsStoreApp} pParent
      */
-    constructor(pDoc) {
-        this.Doc = pDoc;
+    constructor(pParent) {
+        this.Doc = pParent.doc;
     }
 /////////////////////////////////////////////////////////////////////////////
     /**
