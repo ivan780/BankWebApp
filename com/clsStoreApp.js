@@ -12,9 +12,10 @@ class clsStoreApp {
         this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
         this.patronEmail = new RegExp("^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$");
 
-        this.Cookies = new clsCookies(this.doc);
+        this.Cookies = new clsCookies(this);
         this.User = new clsUser(this);
         this.Validate = new clsValidate(this);
+        this.captcha = new clsCaptcha(this);
 
 
         this.GenerateConsoleMessage("clsStoreApp creado");
@@ -26,13 +27,15 @@ class clsStoreApp {
      * @return {boolean}
      */
     userLogin() {
-        var tUN = this.GetScreenValue('username');
-        if (this.Validate._user(tUN)){
+        if (this.captcha.validateCaptcha()){
+            var tUN = this.GetScreenValue('username');
+            if (this.Validate._user(tUN)){
 
-            if (this.User.checkUser(tUN)) {
-                this.Cookies.setCookie("user", md5(tUN) );
-                this.NavigateTo('pass');
-                return true;
+                if (this.User.checkUser(tUN)) {
+                    this.Cookies.setCookie("user", md5(tUN) );
+                    this.NavigateTo('pass');
+                    return true;
+                }
             }
         }
     }
