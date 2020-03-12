@@ -9,8 +9,6 @@ class clsStoreApp {
         this.win = pWin;
         this.debug = pDebug;
 
-        this.patronPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
-        this.patronEmail = new RegExp("^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$");
 
         this.Cookies = new clsCookies(this);
         this.User = new clsUser(this);
