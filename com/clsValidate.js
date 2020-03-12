@@ -15,10 +15,10 @@ class clsValidate {
      */
     _email(pEmail){
         if (this.patronEmail.test(pEmail)){
-            this.parent.GenerateConsoleErr("email valido");
+            this.parent.GenerateConsoleLog("email valido");
             return true
         }
-        this.parent.GenerateConsoleErr("email invalido");
+        this.parent.GenerateConsoleLog("email invalido");
         return false
     }
 /////////////////////////////////////////////////////////////////////////////
@@ -28,10 +28,10 @@ class clsValidate {
      */
     _pass(pPass){
         if (this.patronPass.test(pPass)){
-            this.parent.GenerateConsoleErr("contraseña valida")
+            this.parent.GenerateConsoleLog("contraseña valida")
             return true
         }
-        this.parent.GenerateConsoleErr("contraseña invalida")
+        this.parent.GenerateConsoleLog("contraseña invalida")
         return false
     }
 /////////////////////////////////////////////////////////////////////////////
@@ -41,10 +41,10 @@ class clsValidate {
      */
     _user(pUser){
         if (pUser.length > 3){
-            this.parent.GenerateConsoleErr("usuario valido")
+            this.parent.GenerateConsoleLog("usuario valido")
             return true
         }
-        this.parent.GenerateConsoleErr("usuario invalida")
+        this.parent.GenerateConsoleLog("usuario invalida")
         return false
     }
 }

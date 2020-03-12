@@ -59,7 +59,7 @@ class clsStoreApp {
      * @return {boolean}
      */
     forgotPass() {
-        this.GenerateConsoleErr("forgotPass()");
+        this.GenerateConsoleLog("forgotPass()");
         if (this.Validate._email(this.GetScreenValue("email"))){
             this.NavigateTo("EmailSend")
             return true;
@@ -72,7 +72,7 @@ class clsStoreApp {
      * @param {string} pScreen
      */
     NavigateTo(pScreen) {
-        this.GenerateConsoleErr("NavigateTo(" + pScreen + ")");
+        this.GenerateConsoleLog("NavigateTo(" + pScreen + ")");
 
         if (pScreen == 'initScreen') {
             this.win.location.href = "initialscreen.html";
@@ -101,7 +101,7 @@ class clsStoreApp {
     /**
      * @param {string} pMessage
      */
-    GenerateConsoleErr(pMessage) {
+    GenerateConsoleLog(pMessage) {
         if (this.debug){
             console.log('#' + pMessage);
         }
@@ -127,7 +127,7 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
     Login() {
         if (this._ValidateFields() == true) {
-            this.GenerateConsoleErr('Datos todo correcto ' + this.GetScreenValue('username'));
+            this.GenerateConsoleLog('Datos todo correcto ' + this.GetScreenValue('username'));
             var tUN = this.GetScreenValue('username');
             var tPW = this.GetScreenValue('password');
 
@@ -146,19 +146,19 @@ class clsStoreApp {
         if (pMode == 1){//validar usuario
             var tUN = this.GetScreenValue('username');
             if (!(tUN.length > 3)) {
-                this.GenerateConsoleErr('Usuario no válido');
+                this.GenerateConsoleLog('Usuario no válido');
                 return false;
             }
         }else if (pMode == 2){//validar pass
             var tPW = this.GetScreenValue('password');
-            this.GenerateConsoleErr('Validate fields' + tPW.length);
+            this.GenerateConsoleLog('Validate fields' + tPW.length);
             if (this.patronPass.test(tPW)) {
-                this.GenerateConsoleErr('Password  no válido');
+                this.GenerateConsoleLog('Password  no válido');
                 return false;
             }
         }
 
-        this.GenerateConsoleErr("ValidateFields OK");
+        this.GenerateConsoleLog("ValidateFields OK");
         return true;
     }
 }
