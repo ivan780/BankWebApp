@@ -2,16 +2,16 @@ var mStoreApp;
 console.log('ssssshey');
 
 
-function GetRandom(pMax){
-    return pMax*Math.random()
+function GetRandom(pMax) {
+    return pMax * Math.random()
 }
 
 
-window.onload= function(){
+window.onload = function () {
 
-    if (document.readyState=="complete"){
+    if (document.readyState == "complete") {
         console.log("documento cargado");
-        mStoreApp= new clsStoreApp(window, document, true);
+        mStoreApp = new clsStoreApp(window, document, true);
     }
     /**
      * Por hacer
@@ -54,5 +54,5 @@ window.onload= function(){
      * Documentacion con JSDoc
      *
      */
-  
-}
+
+};
