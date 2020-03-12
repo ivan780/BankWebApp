@@ -19,7 +19,7 @@ class clsUser {
      * @return {boolean}
      */
     checkCredentials() {
-        if (this.parent.win.location.href == "http://localhost:63342/examenAure/initialscreen.html?_ijt=f6lu0l5mjr23qt25q7d1htuhbu"){
+        if (this.parent.win.location.pathname == "/examenAure/initialscreen.html"){
             var user = this.parent.Cookies.getCookie("user");
             var pass = this.parent.Cookies.getCookie("pass");
 

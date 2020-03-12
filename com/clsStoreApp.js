@@ -16,6 +16,7 @@ class clsStoreApp {
         this.User = new clsUser(this);
         this.Validate = new clsValidate(this);
 
+
         this.GenerateConsoleMessage("clsStoreApp creado");
         this.User.checkCredentials();
     }
