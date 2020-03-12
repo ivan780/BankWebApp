@@ -22,9 +22,12 @@
 <div class="shadow"></div>
 
 
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <p id="errorMessage"></p>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<div class="alert alert-warning alert-dismissible fade show" id="erroDivPass" style="display: none;" role="alert">
+    <p>
+        <strong>Error pass</strong>
+        La contraseña es incorrecta, prueba a descativar las mayusculas
+    </p>
+    <button type="button" onclick="mStoreApp.ShowError('erroDivPass')" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
