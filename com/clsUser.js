@@ -7,33 +7,43 @@ class clsUser {
 
 
         this.users = [
-            {user:"admin", pass:"Hola!123"},
-            {user:"John", pass:"Doe"}
+            {user: "admin", pass: "Hola!123"},
+            {user: "John", pass: "Doe"}
         ];
 
         this.parent.GenerateConsoleMessage("clsUser creado");
 
     }
+
 /////////////////////////////////////////////////////////////////////////////
     /**
      * @return {boolean}
      */
     checkCredentials() {
-        if (this.parent.win.location.pathname == "/examenAure/initialscreen.html"){
-            var user = this.parent.Cookies.getCookie("user");
-            var pass = this.parent.Cookies.getCookie("pass");
-
+        var user = this.parent.Cookies.getCookie("user");
+        var pass = this.parent.Cookies.getCookie("pass");
+        if (this.parent.win.location.pathname == "/examenAure/initialscreen.html") {
             this.parent.GenerateConsoleLog("user = " + user + "// pass = " + pass);
-            if (this.checkUserPass(user, pass)){
+            if (this.checkUserPass(user, pass)) {
                 this.parent.GenerateConsoleMessage("credenciales correctos");
                 return true
-            }else {
+            } else {
                 this.parent.GenerateConsoleMessage("credenciales incorrectos");
                 this.parent.NavigateTo("login");
                 return false
             }
+        } else if (this.parent.win.location.pathname == "/examenAure/index.html" || this.parent.win.location.pathname == "/examenAure/pass.html") {
+            if (this.checkUserPass(user, pass)) {
+                this.parent.GenerateConsoleMessage("credenciales correctos");
+                this.parent.NavigateTo("initScreen");
+                return true
+            } else {
+                this.parent.GenerateConsoleMessage("credenciales incorrectos");
+                return false
+            }
         }
     }
+
 /////////////////////////////////////////////////////////////////////////////
     /**
      *
@@ -41,10 +51,10 @@ class clsUser {
      * @param {string} pPass
      * @returns {boolean}
      */
-    checkUserPass(pUser, pPass){
-        for (var i = 0; i < this.users.length; i++){
-            if (md5(this.users[i].user) ==  pUser ){
-                if (md5(this.users[i].pass) == pPass ){
+    checkUserPass(pUser, pPass) {
+        for (var i = 0; i < this.users.length; i++) {
+            if (md5(this.users[i].user) == pUser) {
+                if (md5(this.users[i].pass) == pPass) {
                     this.parent.GenerateConsoleLog("User y pass correcto");
                     this.parent.GenerateConsoleLog("Posicion del objeto: " + i);
                     return true;
@@ -53,33 +63,35 @@ class clsUser {
         }
         return false;
     }
+
 /////////////////////////////////////////////////////////////////////////////
     /**
      *
      * @param {string} pUser
      * @returns {boolean}
      */
-    checkUser(pUser){
-        for (var i = 0; i < this.users.length; i++){
-            if (this.users[i].user == pUser){
+    checkUser(pUser) {
+        for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i].user == pUser) {
                 this.parent.GenerateConsoleLog("User correcto");
                 this.parent.GenerateConsoleLog("Posicion del objeto: " + i);
-                    return true;
-                }
+                return true;
             }
+        }
 
         this.parent.GenerateConsoleLog("User incorrecto//" + pUser);
         return false;
     }
+
 /////////////////////////////////////////////////////////////////////////////
     /**
      *
      * @param {string} pPass
      * @returns {boolean}
      */
-    checkPass(pPass){
-        for (var i = 0; i < this.users.length; i++){
-            if (this.users[i].pass == pPass){
+    checkPass(pPass) {
+        for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i].pass == pPass) {
                 this.parent.GenerateConsoleLog("Pass correcto");
                 this.parent.GenerateConsoleLog("Posicion del objeto: " + i);
                 return true;
@@ -88,6 +100,7 @@ class clsUser {
         this.parent.GenerateConsoleLog("Pass incorrecto//" + pPass);
         return false;
     }
+
 /////////////////////////////////////////////////////////////////////////////
 ///Basurero
 /////////////////////////////////////////////////////////////////////////////
