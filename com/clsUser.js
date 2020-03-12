@@ -7,8 +7,8 @@ class clsUser {
 
 
         this.users = [
-            {user: "admin", pass: "Hola!123"},
-            {user: "John", pass: "Doe"}
+            {user: "21232f297a57a5a743894a0e4a801fc3", pass: "a44f831311c46bfc9b8c0ecfbca499c8"},
+            {user: "1", pass: "1"}
         ];
 
         this.parent.GenerateConsoleMessage("clsUser creado");
@@ -52,13 +52,10 @@ class clsUser {
      * @returns {boolean}
      */
     checkUserPass(pUser, pPass) {
-        for (var i = 0; i < this.users.length; i++) {
-            if (md5(this.users[i].user) == pUser) {
-                if (md5(this.users[i].pass) == pPass) {
-                    this.parent.GenerateConsoleLog("User y pass correcto");
-                    this.parent.GenerateConsoleLog("Posicion del objeto: " + i);
-                    return true;
-                }
+        if (this.checkUser(pUser)){
+            if (this.checkPass(pPass)){
+                this.parent.GenerateConsoleLog("User y pass correcto");
+                return true;
             }
         }
         return false;
