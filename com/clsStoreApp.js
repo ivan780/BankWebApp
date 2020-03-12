@@ -92,7 +92,7 @@ class clsStoreApp {
         } else if (pScreen == 'EmailSend') {
             this.win.location.href = "emailSend.html";
         } else if (pScreen == 'login') {
-            this.win.location.href = "user.html";
+            this.win.location.href = "index.html";
         }else if (pScreen == 'pass') {
             this.win.location.href = "pass.html";
         }
