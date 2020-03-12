@@ -1,7 +1,7 @@
 class clsStoreApp {
     /**
-     * @param {window} pWin
-     * @param {document} pDoc
+     * @param {Window} pWin
+     * @param {Document} pDoc
      * @param {boolean} pDebug
      */
     constructor(pWin, pDoc, pDebug) {
@@ -35,8 +35,14 @@ class clsStoreApp {
                     this.Cookies.setCookie("user", md5(tUN) );
                     this.NavigateTo('pass');
                     return true;
+                }else {
+                    this.ShowError("erroDivUser");
                 }
+            }else {
+                this.ShowError("erroDivUser");
             }
+        }else {
+            this.ShowError("erroDivCaptcha");
         }
     }
 /////////////////////////////////////////////////////////////////////////////
@@ -51,7 +57,11 @@ class clsStoreApp {
                 this.Cookies.setCookie("pass", md5(tPW) );
                 this.NavigateTo('initScreen');
                 return true;
+            }else {
+                this.ShowError("erroDivPass");
             }
+        }else {
+            this.ShowError("erroDivPass");
         }
     }
 /////////////////////////////////////////////////////////////////////////////
@@ -64,8 +74,9 @@ class clsStoreApp {
             this.NavigateTo("EmailSend")
             return true;
             //Envio de correo al servidor, si hubiera
+        }else {
+            this.ShowError("erroDivEmail");
         }
-
     }
 /////////////////////////////////////////////////////////////////////////////
     /**
@@ -99,6 +110,17 @@ class clsStoreApp {
     }
 /////////////////////////////////////////////////////////////////////////////
     /**
+     *
+     * @param {string} pFieldName
+     * @return {*}
+     */
+    GetScreenElement(pFieldName) {
+        var tS = this.doc.getElementById(pFieldName);
+        console.log("_" + pFieldName);
+        return tS
+    }
+/////////////////////////////////////////////////////////////////////////////
+    /**
      * @param {string} pMessage
      */
     GenerateConsoleLog(pMessage) {
@@ -115,11 +137,14 @@ class clsStoreApp {
     }
 /////////////////////////////////////////////////////////////////////////////
     /**
-     * @param pMessage
+     * @param {string} pDivId
      */
-    GenerateFormErr(pMessage) {
-        if (this.debug){
-            console.log('#' + pMessage);
+    ShowError(pDivId) {
+        var div = this.GetScreenElement(pDivId)
+        if (div.style.display == "none"){
+            div.style.display = "block";
+        }else {
+            div.style.display = "none";
         }
     }
 /////////////////////////////////////////////////////////////////////////////
