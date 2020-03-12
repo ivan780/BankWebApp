@@ -31,7 +31,7 @@ class clsStoreApp {
             var tUN = this.GetScreenValue('username');
             if (this.Validate._user(tUN)){
 
-                if (this.User.checkUser(tUN)) {
+                if (this.User.checkUser(md5(tUN))) {
                     this.Cookies.setCookie("user", md5(tUN) );
                     this.NavigateTo('pass');
                     return true;
@@ -53,7 +53,7 @@ class clsStoreApp {
         var tPW = this.GetScreenValue('password');
         if (!this.Validate._pass(tPW)) {
 
-            if (this.User.checkPass(tPW)) {
+            if (this.User.checkPass(md5(tPW))) {
                 this.Cookies.setCookie("pass", md5(tPW) );
                 this.NavigateTo('initScreen');
                 return true;
@@ -150,40 +150,4 @@ class clsStoreApp {
 /////////////////////////////////////////////////////////////////////////////
 ///Basurero
 /////////////////////////////////////////////////////////////////////////////
-    Login() {
-        if (this._ValidateFields() == true) {
-            this.GenerateConsoleLog('Datos todo correcto ' + this.GetScreenValue('username'));
-            var tUN = this.GetScreenValue('username');
-            var tPW = this.GetScreenValue('password');
-
-
-            if (tUN == 'admin' && tPW == 'Hola!123') {
-                this.Cookies.setCookie("user", tUN, 1);
-                this.Cookies.setCookie("pass", tPW, 1);
-                this.NavigateTo('initScreen');
-                return true
-            }
-        }
-        return false;
-    }
-/////////////////////////////////////////////////////////////////////////////
-    ValidateFields(pMode) {
-        if (pMode == 1){//validar usuario
-            var tUN = this.GetScreenValue('username');
-            if (!(tUN.length > 3)) {
-                this.GenerateConsoleLog('Usuario no válido');
-                return false;
-            }
-        }else if (pMode == 2){//validar pass
-            var tPW = this.GetScreenValue('password');
-            this.GenerateConsoleLog('Validate fields' + tPW.length);
-            if (this.patronPass.test(tPW)) {
-                this.GenerateConsoleLog('Password  no válido');
-                return false;
-            }
-        }
-
-        this.GenerateConsoleLog("ValidateFields OK");
-        return true;
-    }
 }
