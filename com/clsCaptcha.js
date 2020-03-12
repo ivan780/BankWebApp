@@ -1,7 +1,6 @@
 class clsCaptcha {
 
     /**
-     *
      * @param {clsStoreApp} pParent
      */
     constructor(pParent) {

@@ -1,7 +1,4 @@
 var mStoreApp;
-var mCookie;
-var mUser;
-var mUtils;
 console.log('ssssshey');
 
 
